@@ -10,6 +10,12 @@ export async function getFilmes(): Promise<Filme[]>
   return dados;
 }
 
+export async function getFilmeUnico(id: number): Promise<Filme>{
+  const response = await fetch(`${API_URL}/filmes/${id}`);
+  const dados = await response.json();
+  return dados;
+}
+
 
 export async function createFilme(filme: CreateFilmeDTO): Promise<void>
 {
