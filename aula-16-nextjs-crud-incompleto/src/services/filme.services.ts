@@ -41,11 +41,7 @@ export async function updateFilme(id: number, filme: UpdateFilmeDTO): Promise<vo
 
 export async function deleteFilme(id: number): Promise<void>
 {
-  const response = await fetch(`${API_URL}/filmes/${id}`,{
+  await fetch(`${API_URL}/filmes/${id}`,{
     method: "DELETE",
   });
-
-  if (!response.ok){
-    throw new Error(`Falha ao excluir com ID ${id}. Status: ${response.status}`);
-  }
 }
