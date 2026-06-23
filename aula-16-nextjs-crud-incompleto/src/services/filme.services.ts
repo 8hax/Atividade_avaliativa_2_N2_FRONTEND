@@ -1,7 +1,6 @@
 import {Filme, CreateFilmeDTO, UpdateFilmeDTO} from "@/tipos/filme";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getFilmes(): Promise<Filme[]>
 {
@@ -32,8 +31,8 @@ export async function createFilme(filme: CreateFilmeDTO): Promise<void>
 export async function updateFilme(id: number, filme: UpdateFilmeDTO): Promise<void>
 {
   await fetch(`${API_URL}/filmes/${id}`,{
-  method: "PUT",
-  headers: {
+    method: "PUT",
+    headers: {
     "Content-Type": "application/json"
   },
   body: JSON.stringify(filme)
@@ -42,5 +41,11 @@ export async function updateFilme(id: number, filme: UpdateFilmeDTO): Promise<vo
 
 export async function deleteFilme(id: number): Promise<void>
 {
+  const response = await fetch(`${API_URL}/filmes/${id}`,{
+    method: "DELETE",
+  });
 
+  if (!response.ok){
+    throw new Error(`Falha ao excluir com ID ${id}. Status: ${response.status}`);
+  }
 }
